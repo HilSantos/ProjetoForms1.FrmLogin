@@ -56,6 +56,9 @@ using (SqlConnection conn = new SqlConnection("sua_string_de_conexao"))
     {
         // Login bem-sucedido
         MessageBox.Show("Login bem-sucedido!");
+        this.Hide();
+FrmMenu mainForm = new FrmMenu();
+mainForm.Show();
     }
         else
         {
