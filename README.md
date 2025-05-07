@@ -43,7 +43,29 @@ if (usuario == "admin" && senha == "1234")
                     // frm.Show();
                     // this.Hide();
                 }
-                else
+                    string query = "SELECT COUNT(*) FROM funcionario WHERE" + "usuario = @usuario AND senha = " +
+    "@senha";
+using (SqlConnection conn = new SqlConnection("sua_string_de_conexao"))
+{
+    SqlCommand cmd = new SqlCommand(query, conn);
+    cmd.Parameters.AddWithValue("@usuario", usuario);
+    cmd.Parameters.AddWithValue("@senha", senha);
+    conn.Open();
+    int count = (int)cmd.ExecuteScalar();
+    if (count > 0)
+    {
+        // Login bem-sucedido
+        MessageBox.Show("Login bem-sucedido!");
+    }
+        else
+        {
+            // Login falhou
+            MessageBox.Show("Usuário ou senha incorretos!");
+        }
+    }
+}
+    
+else
                 {
                     lblStatus.ForeColor = System.Drawing.Color.Red;
                     lblStatus.Text = "Usuário ou senha incorretos!";
